@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class CustomSlider extends StatefulWidget {
-  const CustomSlider({Key? key}) : super(key: key);
+  const CustomSlider({super.key});
 
   @override
   State<CustomSlider> createState() => _CustomSlider();

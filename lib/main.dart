@@ -1,19 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import 'items/CustomJoystickArea.dart';
-import 'items/costumSlider.dart';
+import 'items/customJoystickArea.dart';
+import 'items/customSlider.dart';
 
 void main() {
   runApp(const HopfenHeldApp());
 }
 
-const ballSize = 20.0;
-const step = 10.0;
-
 class HopfenHeldApp extends StatelessWidget {
-  const HopfenHeldApp({Key? key}) : super(key: key);
+  const HopfenHeldApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +40,53 @@ class HopfenHeldApp extends StatelessWidget {
 }
 
 class BodyLayout extends StatelessWidget {
-  const BodyLayout({Key? key}) : super(key: key);
+  const BodyLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromRGBO(235, 168, 14, 1.0),
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    const CustomJoystickArea joystick = CustomJoystickArea();
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(235, 168, 14, 1.0),
       body: SafeArea(
         child: Row(
           children: [
-            Expanded(
-              child: CustomJoystickArea(),
+            const Expanded(
+              child: joystick,
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: Icon(Icons.upcoming, size: 40),
-                  ),
-                  Expanded(
-                    child: Icon(Icons.campaign, size: 40),
-                  ),
-                  Expanded(
-                    child: Icon(
-                      Icons.light_mode_rounded,
-                      size: 40,
+                    child: IconButton(
+                      icon: const Icon(Icons.upcoming),
+                      iconSize: screenHeight * 0.1,
+                      onPressed: () {
+                        print("Blaulicht");
+                      },
                     ),
                   ),
-                  SizedBox(height: 50), // Spacer Widget hinzugefügt
+                  Expanded(
+                    child: IconButton(
+                      icon: const Icon(Icons.campaign),
+                      iconSize: screenHeight * 0.1,
+                      onPressed: () {
+                        print("Hupe");
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      icon: const Icon(Icons.light_mode_rounded),
+                      iconSize: screenHeight * 0.1,
+                      onPressed: () {
+                        print("Licht");
+                      },
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.1), // Spacer Widget hinzugefügt
                 ],
               ),
             ),
@@ -82,21 +95,23 @@ class BodyLayout extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(child: CustomSlider()),
-                          Expanded(child: Icon(Icons.sports_bar_rounded, size: 50))
-                        ],
-                      )
+                    child: Row(
+                      children: [
+                        Expanded(child: CustomSlider()),
+                        Expanded(child: Icon(Icons.sports_bar_rounded, size: screenHeight * 0.15))
+                      ],
+                    ),
                   ),
-                  Expanded(child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(Icons.chevron_left, size: 50),
-                      Icon(Icons.warning, size: 50),
-                      Icon(Icons.chevron_right, size: 50)
-                    ],
-                  )),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Icons.chevron_left, size: screenHeight * 0.1),
+                        Icon(Icons.warning, size: screenHeight * 0.1),
+                        Icon(Icons.chevron_right, size: screenHeight * 0.1)
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

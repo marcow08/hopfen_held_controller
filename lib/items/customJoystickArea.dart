@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_joystick/flutter_joystick.dart';
 
-import 'costumJoystick.dart';
+import 'customJoystick.dart';
 
 const step = 10.0;
 const ballSize = 20.0;
 
 class CustomJoystickArea extends StatefulWidget {
-  const CustomJoystickArea({Key? key}) : super(key: key);
+  const CustomJoystickArea({super.key});
 
   @override
   State<CustomJoystickArea> createState() => _CustomJoystickAreaState();
@@ -52,7 +52,7 @@ class Ball extends StatelessWidget {
   final double x;
   final double y;
 
-  const Ball(this.x, this.y, {Key? key}) : super(key: key);
+  const Ball(this.x, this.y, {super.key});
 
   @override
   Widget build(BuildContext context) {
