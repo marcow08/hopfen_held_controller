@@ -37,7 +37,15 @@ Container toolbarContainer(double screenHeight) {
               },
             ),
           ),
-          SizedBox(height: screenHeight * 0.1), // Spacer Widget hinzugefügt
+          Expanded(
+              child: IconButton(
+                icon: const Icon(Icons.auto_awesome),
+                iconSize: screenHeight * 0.1,
+                onPressed: () {
+                print("Steering");
+                },
+              ),
+          ),
         ],
       ),
     ),
