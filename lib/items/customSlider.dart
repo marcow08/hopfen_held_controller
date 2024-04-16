@@ -18,6 +18,7 @@ class _CustomSlider extends State<CustomSlider> {
       backgroundColor: const Color.fromRGBO(235, 168, 14, 1.0),
       body: Center(
         child: SfSlider.vertical(
+          activeColor: Colors.grey.shade800,
           value: _value,
           onChanged: (dynamic newValue){
             setState(() {

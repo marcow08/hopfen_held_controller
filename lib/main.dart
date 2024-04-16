@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'items/customJoystickArea.dart';
-import 'items/customSlider.dart';
+import 'items/spritzer.dart';
+import 'items/toolbar.dart';
 
 void main() {
   runApp(const HopfenHeldApp());
@@ -55,66 +56,9 @@ class BodyLayout extends StatelessWidget {
             const Expanded(
               child: joystick,
             ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: IconButton(
-                      icon: const Icon(Icons.upcoming),
-                      iconSize: screenHeight * 0.1,
-                      onPressed: () {
-                        print("Blaulicht");
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: IconButton(
-                      icon: const Icon(Icons.campaign),
-                      iconSize: screenHeight * 0.1,
-                      onPressed: () {
-                        print("Hupe");
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: IconButton(
-                      icon: const Icon(Icons.light_mode_rounded),
-                      iconSize: screenHeight * 0.1,
-                      onPressed: () {
-                        print("Licht");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.1), // Spacer Widget hinzugefügt
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Expanded(child: CustomSlider()),
-                        Expanded(child: Icon(Icons.sports_bar_rounded, size: screenHeight * 0.15))
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(Icons.chevron_left, size: screenHeight * 0.1),
-                        Icon(Icons.warning, size: screenHeight * 0.1),
-                        Icon(Icons.chevron_right, size: screenHeight * 0.1)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            toolbarContainer(screenHeight),
+
+            spritzerExpanded(screenHeight),
           ],
         ),
       ),

@@ -5,8 +5,8 @@ class CustomJoystickStick extends StatelessWidget {
 
   const CustomJoystickStick({
     this.size = 50,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class CustomJoystickStick extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color.fromRGBO(150, 104, 5, 1.0),
-            Color.fromRGBO(194, 133, 2, 1.0),
+            Color.fromRGBO(80, 80, 80, 0.8),
+            Color.fromRGBO(60, 60, 60, 0.8),
           ],
         ),
       ),
