@@ -35,7 +35,9 @@ class _CustomJoystickAreaState extends State<CustomJoystickArea> {
                 listener: (details) {
                   setState(() {
                     _x = _x + step * details.x;
+                    print(details.x);
                     _y = _y + step * details.y;
+                    print(details.y);
                   });
                 },
               ),

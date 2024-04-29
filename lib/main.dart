@@ -1,14 +1,20 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import 'items/customJoystickArea.dart';
 import 'items/spritzer.dart';
 import 'items/toolbar.dart';
 
 void main() {
-  runApp(const HopfenHeldApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
+      .then((_) {
+    runApp(const HopfenHeldApp());
+  });
 }
 
 class HopfenHeldApp extends StatelessWidget {
@@ -26,24 +32,25 @@ class HopfenHeldApp extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-        title: const Text('Welcome to Hopfen Held'),
-        backgroundColor: Colors.white,
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20)),
-            onPressed: () {
-              print("foooooooobaaaaaaaaaa");
-            },
-            child: const Row(
-              children: [
-                Text('Bluetooth'),
-                Icon(Icons.bluetooth),
-              ],
-            ),
+      title: const Text('Welcome to Hopfen Held'),
+      backgroundColor: Colors.white,
+      actions: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20)),
+          onPressed: () {
+            print("foooooooobaaaaaaaaaa");
+            connectAndSendCommands();
+          },
+          child: const Row(
+            children: [
+              Text('Bluetooth'),
+              Icon(Icons.bluetooth),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }
 
@@ -75,50 +82,25 @@ class BodyLayout extends StatelessWidget {
 
 Future<void> connectAndSendCommands() async {
   // Initialize Bluetooth
-  FlutterBlue flutterBlue = FlutterBlue.instance;
+  FlutterBluetoothSerial flutterBluetoothSerial = FlutterBluetoothSerial.instance;
   // Start scanning for devices
-  flutterBlue.startScan(timeout: const Duration(seconds: 4));
-
-  // Connect to ESP32
-  BluetoothDevice? esp32;
-  flutterBlue.scanResults.listen((results) {
-    for (ScanResult result in results) {
-      if (result.device.name == 'ESP32') {
-        esp32 = result.device;
-        break;
-      }
-    }
-    if (esp32 != null) {
-      // Stop scanning
-      flutterBlue.stopScan();
+  flutterBluetoothSerial.startDiscovery().listen((r) {
+    BluetoothDiscoveryResult result = r;
+    print(result.device.name);
+    if (result.device.name == 'ESP32') {
       // Connect to ESP32
-      esp32!.connect();
-      // Discover services and characteristics
-      discoverServices(esp32!);
+      BluetoothConnection.toAddress(result.device.address).then((connection) {
+        print('connected!');
+        _sendCommands(connection);
+      });
     }
   });
 }
 
-Future<void> discoverServices(BluetoothDevice esp32) async {
-  var services = [];
-  services = await esp32.discoverServices();
-  for (BluetoothService service in services) {
-    for (BluetoothCharacteristic characteristic in service.characteristics) {
-// Check if the characteristic supports write
-      if (characteristic.properties.write) {
-// Write your JSON data to the characteristic
-        _sendCommands(characteristic);
-        return;
-      }
-    }
-  }
-}
-
-void _sendCommands(BluetoothCharacteristic characteristic) {
-// Send commands at 50ms interval
-  Timer.periodic(const Duration(milliseconds: 50), (timer) {
-// Send JSON commands here
-    characteristic.write([...]); // Replace [...] with your JSON data bytes
+void _sendCommands(BluetoothConnection connection) {
+  Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    // Send JSON commands here
+    print("naise"); // Replace [...] with your JSON data bytes
+    connection.output.add(utf8.encode("naise\n")); // Sending data
   });
 }
-

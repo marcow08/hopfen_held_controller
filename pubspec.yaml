@@ -38,6 +38,7 @@ dependencies:
   flutter_joystick: ^0.0.4
   syncfusion_flutter_sliders: ^25.1.39
   flutter_blue: ^0.8.0
+  flutter_bluetooth_serial: ^0.4.0
 
 dev_dependencies:
   flutter_test:
