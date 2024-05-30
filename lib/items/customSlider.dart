@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
+import '../utils/bluetooth.dart';
+
 class CustomSlider extends StatefulWidget {
   const CustomSlider({super.key});
 
@@ -10,6 +12,7 @@ class CustomSlider extends StatefulWidget {
 
 class _CustomSlider extends State<CustomSlider> {
   double _value = 0.5;
+  InputHandler inputHandler = InputHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class _CustomSlider extends State<CustomSlider> {
           onChanged: (dynamic newValue){
             setState(() {
               _value = newValue;
+              inputHandler.setLadderPosition(_value);
             });
           },
         ),

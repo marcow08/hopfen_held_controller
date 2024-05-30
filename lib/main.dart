@@ -116,7 +116,16 @@ class _HopfenHeldAppState extends State<HopfenHeldApp> {
         'xValue': inputHandler.getJoystickData()[0],
         'yValue': inputHandler.getJoystickData()[1]
       };
-      connection.output.add(utf8.encode('${inputHandler.getJoystickData()[0]};${inputHandler.getJoystickData()[1]} \n'));
+      connection.output.add(utf8.encode(''
+          '${inputHandler.getJoystickData()[0]};'
+          '${inputHandler.getJoystickData()[1]};'
+          '${inputHandler.getLadderPosition()};'
+          '${inputHandler.getWaterPumpState()};'
+          '${inputHandler.getIndicatorState()};'
+          '${inputHandler.getLightState()};'
+          '${inputHandler.getAutopilotState()}'
+          '\n'
+      ));
     });
   }
 

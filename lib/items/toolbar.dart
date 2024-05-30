@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../utils/bluetooth.dart';
+
 Container toolbarContainer(double screenHeight) {
+  InputHandler inputHandler = InputHandler();
+
   return Container(
     decoration: BoxDecoration(
       color: Colors.grey.shade300,
@@ -34,6 +38,7 @@ Container toolbarContainer(double screenHeight) {
               iconSize: screenHeight * 0.1,
               onPressed: () {
                 print("Licht");
+                inputHandler.setLightState(1);
               },
             ),
           ),
@@ -42,7 +47,12 @@ Container toolbarContainer(double screenHeight) {
                 icon: const Icon(Icons.auto_awesome),
                 iconSize: screenHeight * 0.1,
                 onPressed: () {
-                print("Steering");
+                  print("Steering");
+                  if (inputHandler.getAutopilotState() == 1) {
+                    inputHandler.setAutopilotState(0);
+                  } else {
+                    inputHandler.setAutopilotState(1);
+                  }
                 },
               ),
           ),
