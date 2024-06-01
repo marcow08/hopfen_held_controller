@@ -98,8 +98,13 @@ class _HopfenHeldAppState extends State<HopfenHeldApp> {
 
   void _startSendingCommands(BluetoothConnection connection, InputHandler inputHandler) {
     bluetoothConnection = connection;
+    bool canSend = true;
+
     connection.input?.listen((Uint8List data) {
-      // Handle received data
+      String response = utf8.decode(data);
+      if (response.trim() == 'OK') {
+        canSend = true;
+      }
     }, onDone: () {
       print('Connection closed!');
       setState(() {
@@ -111,21 +116,25 @@ class _HopfenHeldAppState extends State<HopfenHeldApp> {
         bluetoothStatus = 'Connect';
       });
     });
-    Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      Map data = {
-        'xValue': inputHandler.getJoystickData()[0],
-        'yValue': inputHandler.getJoystickData()[1]
-      };
-      connection.output.add(utf8.encode(''
-          '${inputHandler.getJoystickData()[0]};'
-          '${inputHandler.getJoystickData()[1]};'
-          '${inputHandler.getLadderPosition()};'
-          '${inputHandler.getWaterPumpState()};'
-          '${inputHandler.getIndicatorState()};'
-          '${inputHandler.getLightState()};'
-          '${inputHandler.getAutopilotState()}'
-          '\n'
-      ));
+
+    Timer.periodic(const Duration(milliseconds: 150), (timer) {
+      if (canSend) {
+        canSend = false;
+        Map data = {
+          'xValue': inputHandler.getJoystickData()[0],
+          'yValue': inputHandler.getJoystickData()[1]
+        };
+        connection.output.add(utf8.encode(''
+            '${inputHandler.getJoystickData()[0]};'
+            '${inputHandler.getJoystickData()[1]};'
+            '${inputHandler.getLadderPosition()};'
+            '${inputHandler.getWaterPumpState()};'
+            '${inputHandler.getIndicatorState()};'
+            '${inputHandler.getLightState()};'
+            '${inputHandler.getAutopilotState()}'
+            '\n'
+        ));
+      }
     });
   }
 
