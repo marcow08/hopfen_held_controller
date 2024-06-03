@@ -47,7 +47,7 @@ Container toolbarContainer(double screenHeight) {
               icon: const Icon(Icons.auto_awesome),
               iconSize: screenHeight * 0.1,
               onPressed: () {
-                debugPrint("Steering");
+                debugPrint("Autopilot");
                 if (inputHandler.getAutopilotState() == 1) {
                   inputHandler.setAutopilotState(0);
                 } else {

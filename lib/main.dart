@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:hopfen_held/items/toolbar.dart';
 import 'package:hopfen_held/utils/bluetooth.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -238,7 +239,9 @@ class BodyLayout extends StatelessWidget {
                   flex: 4,
                   child: joystick,
                 ),
-                const Spacer(),
+                Expanded(
+                  child: toolbarContainer(screenHeight),
+                ),
                 Expanded(
                   flex: 4,
                   child: spritzerExpanded(screenHeight),
