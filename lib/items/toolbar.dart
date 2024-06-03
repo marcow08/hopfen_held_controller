@@ -19,7 +19,7 @@ Container toolbarContainer(double screenHeight) {
               icon: const Icon(Icons.upcoming),
               iconSize: screenHeight * 0.1,
               onPressed: () {
-                print("Blaulicht");
+                debugPrint("Blaulicht");
               },
             ),
           ),
@@ -28,7 +28,7 @@ Container toolbarContainer(double screenHeight) {
               icon: const Icon(Icons.campaign),
               iconSize: screenHeight * 0.1,
               onPressed: () {
-                print("Hupe");
+                debugPrint("Hupe");
               },
             ),
           ),
@@ -37,24 +37,24 @@ Container toolbarContainer(double screenHeight) {
               icon: const Icon(Icons.light_mode_rounded),
               iconSize: screenHeight * 0.1,
               onPressed: () {
-                print("Licht");
+                debugPrint("Licht");
                 inputHandler.setLightState(1);
               },
             ),
           ),
           Expanded(
-              child: IconButton(
-                icon: const Icon(Icons.auto_awesome),
-                iconSize: screenHeight * 0.1,
-                onPressed: () {
-                  print("Steering");
-                  if (inputHandler.getAutopilotState() == 1) {
-                    inputHandler.setAutopilotState(0);
-                  } else {
-                    inputHandler.setAutopilotState(1);
-                  }
-                },
-              ),
+            child: IconButton(
+              icon: const Icon(Icons.auto_awesome),
+              iconSize: screenHeight * 0.1,
+              onPressed: () {
+                debugPrint("Steering");
+                if (inputHandler.getAutopilotState() == 1) {
+                  inputHandler.setAutopilotState(0);
+                } else {
+                  inputHandler.setAutopilotState(1);
+                }
+              },
+            ),
           ),
         ],
       ),
