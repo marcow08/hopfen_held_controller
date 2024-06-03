@@ -16,34 +16,6 @@ Container toolbarContainer(double screenHeight) {
         children: [
           Expanded(
             child: IconButton(
-              icon: const Icon(Icons.upcoming),
-              iconSize: screenHeight * 0.1,
-              onPressed: () {
-                debugPrint("Blaulicht");
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              icon: const Icon(Icons.campaign),
-              iconSize: screenHeight * 0.1,
-              onPressed: () {
-                debugPrint("Hupe");
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              icon: const Icon(Icons.light_mode_rounded),
-              iconSize: screenHeight * 0.1,
-              onPressed: () {
-                debugPrint("Licht");
-                inputHandler.setLightState(1);
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
               icon: const Icon(Icons.auto_awesome),
               iconSize: screenHeight * 0.1,
               onPressed: () {
