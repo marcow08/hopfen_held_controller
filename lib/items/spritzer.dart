@@ -8,8 +8,8 @@ Widget spritzerExpanded(double screenHeight) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      const Spacer(),
-      const Expanded(flex: 2, child: CustomSlider()),
+      SizedBox(height: screenHeight * 0.1),
+      const Expanded(child: CustomSlider()),
       Expanded(
         child: AspectRatio(
           aspectRatio: 1,
@@ -29,7 +29,6 @@ Widget spritzerExpanded(double screenHeight) {
           ),
         ),
       ),
-      const Spacer(),
     ],
   );
 }
